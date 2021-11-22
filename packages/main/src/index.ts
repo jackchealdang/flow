@@ -1,6 +1,6 @@
-import {app, BrowserWindow, shell} from 'electron';
-import {join} from 'path';
-import {URL} from 'url';
+import { app, BrowserWindow, shell } from 'electron';
+import { join } from 'path';
+import { URL } from 'url';
 
 
 const isSingleInstance = app.requestSingleInstanceLock();
@@ -16,7 +16,7 @@ app.disableHardwareAcceleration();
 if (import.meta.env.MODE === 'development') {
   app.whenReady()
     .then(() => import('electron-devtools-installer'))
-    .then(({default: installExtension, VUEJS3_DEVTOOLS}) => installExtension(VUEJS3_DEVTOOLS, {
+    .then(({ default: installExtension, VUEJS3_DEVTOOLS }) => installExtension(VUEJS3_DEVTOOLS, {
       loadExtensionOptions: {
         allowFileAccess: true,
       },
@@ -29,6 +29,10 @@ let mainWindow: BrowserWindow | null = null;
 const createWindow = async () => {
   mainWindow = new BrowserWindow({
     show: false, // Use 'ready-to-show' event to show window
+    // Vibrancy effect only works under MacOS and Windows :(
+    backgroundColor: "#00000000",
+    // vibrancy: 'under-window',
+    // visualEffectState: 'active',
     webPreferences: {
       nativeWindowOpen: true,
       preload: join(__dirname, '../../preload/dist/index.cjs'),
@@ -54,7 +58,7 @@ const createWindow = async () => {
    *
    * @see https://stackoverflow.com/a/67409223
    */
-   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
+  mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     shell.openExternal(url);
     return { action: 'deny' };
   });
@@ -98,7 +102,7 @@ app.whenReady()
 if (import.meta.env.PROD) {
   app.whenReady()
     .then(() => import('electron-updater'))
-    .then(({autoUpdater}) => autoUpdater.checkForUpdatesAndNotify())
+    .then(({ autoUpdater }) => autoUpdater.checkForUpdatesAndNotify())
     .catch((e) => console.error('Failed check updates:', e));
 }
 

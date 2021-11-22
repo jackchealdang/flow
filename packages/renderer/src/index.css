@@ -1,0 +1,21 @@
+html, body{
+  /* Vibrancy doesn't work on Linux, so I just disabled this :(
+  background-color: transparent;
+  */
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Ubuntu", "Canterell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: greyscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+}
+
+#root {
+  height: 100%;
+}
